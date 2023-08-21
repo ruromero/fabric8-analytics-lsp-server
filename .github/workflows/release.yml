@@ -18,6 +18,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
+      - name: Authenticate with private NPM package
+        run: |
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "@RHEcosystemAppEng:registry=https://npm.pkg.github.com/" >> ~/.npmrc
       - name: Install dependencies
         run: npm ci
       - name: Release
