@@ -24,7 +24,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/IlonaShishov/fabric8-analytics-lsp-server.git"
+    "url": "https://github.com/ruromero/fabric8-analytics-lsp-server.git"
   },
   "main": "dist/server.js",
   "bin": "dist/server.js",
@@ -42,6 +42,7 @@
   },
   "devDependencies": {
     "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@types/chai": "^4.3.5",
     "@types/lru-cache": "^7.10.10",
     "@types/mocha": "^10.0.1",

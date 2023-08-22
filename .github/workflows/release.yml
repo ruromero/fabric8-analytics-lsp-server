@@ -14,7 +14,7 @@ jobs:
       - name: Create .npmrc
         run: |
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.PKG_TOKEN }}" >> ~/.npmrc
-          echo "@RHEcosystemAppEng:registry=https://npm.pkg.github.com" > ~/.npmrc
+          echo "@RHEcosystemAppEng:registry=https://npm.pkg.github.com/" > ~/.npmrc
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -26,5 +26,6 @@ jobs:
         run: npm ci
       - name: Release
         env:
-          GIT_CREDENTIALS: IlonaShishov:${{ secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
