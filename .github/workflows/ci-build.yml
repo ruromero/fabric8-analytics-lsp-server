@@ -15,15 +15,27 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+        registry-url: 'https://npm.pkg.github.com/'
+        scope: '@RHEcosystemAppEng'
+        cache: 'npm'
     - name: Install Dependencies
       run: npm ci
+      env:
+        # also other environment variable
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Invoke LSP entrypoint(server.js)
       run: node dist/server.js
+      env:
+        # also other environment variable
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Run the unit tests
       run: npm test -- --coverage
+      env:
+        # also other environment variable
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
@@ -35,13 +47,22 @@ jobs:
     - name: pull lsp code
       uses: actions/checkout@v2
     - name: Setup Node env
-      uses: actions/setup-node@v2.1.2
+      uses: actions/setup-node@v3
       with:
         node-version: 18.x
+        registry-url: 'https://npm.pkg.github.com/'
+        scope: '@RHEcosystemAppEng'
+        cache: 'npm'
     - name: Install Dependencies
       run: npm ci
+      env:
+        # also other environment variable
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Create local package tarball
       run: npm pack
+      env:
+        # also other environment variable
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: pull vscode-extension code
       uses: actions/checkout@v2
       with:
@@ -49,12 +70,21 @@ jobs:
         path: vscode-extension
     - name: Install vsce
       run: npm i -g vsce
+      env:
+        # also other environment variable
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Install Dependencies
       run: npm ci
       working-directory: ./vscode-extension
+      env:
+        # also other environment variable
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Install local lsp
       run: npm i ../fabric8-analytics-lsp-server-*.tgz
       working-directory: ./vscode-extension
+      env:
+        # also other environment variable
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Remove test files
       run: rm -fr test
       working-directory: ./vscode-extension
