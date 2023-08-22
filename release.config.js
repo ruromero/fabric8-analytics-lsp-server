@@ -39,7 +39,7 @@ module.exports = {
     {
       // shasum
       "path": "@semantic-release/exec",
-      "cmd": "shasum -a 256 analytics-lsp-linux > bin/analytics-lsp-linux.sha256 && shasum -a 256 analytics-lsp-macos > bin/analytics-lsp-macos.sha256 && shasum -a 256 analytics-lsp-win.exe > bin/analytics-lsp-win.sha256"
+      "cmd": "shasum -a 256 bin/analytics-lsp-linux > bin/analytics-lsp-linux.sha256 && shasum -a 256 bin/analytics-lsp-macos > bin/analytics-lsp-macos.sha256 && shasum -a 256 bin/analytics-lsp-win.exe > bin/analytics-lsp-win.sha256"
     },
   ]
 }
